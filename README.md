@@ -12,7 +12,7 @@ Intelligent navigation-helper agents are critical as they can navigate users in 
 ## Data
 
 In order to automatically
-evaluate conversational multi-modal navigation helpers in a cooperative dynamic, we propose two tasks, Response from Dialog History (RDH) and Response during Interaction (RdI). **We first convert the three exsisting Vision-and-Dialog datasets to fit the input and output of RDH task,** where the three datasets are:
+evaluate conversational multi-modal navigation helpers in a cooperative dynamic, we propose two tasks, Response to Dialog History (RDH) and Response during Interaction (RdI). **We first convert the three exsisting Vision-and-Dialog datasets to fit the input and output of RDH task,** where the three datasets are:
 - CVDN with photo-realistic indoor visual environment.
 - AVDN with photo-realistic ourdoor visual environment.
 - DialFRED with sythetic indoor visual environment.
