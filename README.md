@@ -23,9 +23,9 @@ Three converted datasets are available at https://drive.google.com/drive/folders
 
 Each dataset is split to train, seen and unseen validation set according to the original splits. **Especially, we create a sample set for each dataset to help better understanding of our data**.
 
-In RDH task, the helper agent outputs responses based on individual task performer's help requests. We format and convert all three datasets to suit the training and evaluation on RDH task. Each data sample contains the input as a natural language inquirey about the navigation from the task performer, visual observation from the task performer and a sequence of images showing oracle information for the navigation; the output as a natural language response corresponding to the inquirey. 
+In RDH task, the helper agent outputs responses based on individual task performer's help requests among three different environments. We format and convert all three datasets to suit the training and evaluation based on RDH task. Each data sample contains the input as a natural language inquirey about the navigation from the task performer, visual observation from the task performer and a sequence of images showing oracle information for the navigation; the output as a natural language response corresponding to the inquirey. 
 
-For RdI task, the helper agent needs to interact with the task performer consistantly. Therefore the input data are sampled in real-time from the simulator without the need of any offline dataset, except some task definitions i.e. trajectory starting points and target positions.
+For RdI task, the helper agent needs to interact with the task performer consistently. Therefore the input data are sampled in real-time from the simulator without the need of any offline dataset, except some task definitions i.e. trajectory starting points and target positions.
 
 
 
@@ -61,7 +61,7 @@ Then, we replace the original human responses in the CVDN/AVDN/DialFRED validati
 
 ### Script for real-time inference (for RdI task):
 
-In RdI task, the helper agent needs to interact with the task performer consistantly. We deploy both the helper agent and task performer agent in simulations of CVDN for evaluation. With the script below, we enable SeeRee to run as a real-time api for responding to any help request. 
+In RdI task, since the helper agent needs to interact with the task performer consistently, we deploy both the helper agent and task performer agent in the Matterport3D simulator. With the script below, SeeRee will run as a real-time api for responding to any help request. 
 
 ```./SeeRee/scripts/online_inference_seeree.sh```
 
