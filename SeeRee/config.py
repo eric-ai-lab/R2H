@@ -55,7 +55,7 @@ class SharedConfigs(object):
                             help="Directory with all datasets, each in one subfolder")
         parser.add_argument("--output_dir", default='output/', type=str, required=False,
                             help="The output directory to save checkpoint and test results.")
-        parser.add_argument("--data_dir", default='coco_caption/train.yaml', type=str, required=False,
+        parser.add_argument("--train_yaml", default='coco_caption/train.yaml', type=str, required=False,
                             help="Yaml file with all data for training.")
 
         # multimodal transformer modeling config

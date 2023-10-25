@@ -215,7 +215,7 @@ def update_existing_config_for_inference(args):
 
     train_args.eval_model_dir = args.eval_model_dir
     train_args.resume_checkpoint = args.eval_model_dir + 'model.bin'
-    train_args.model_name_or_path = './SwinBERT/models/captioning/bert-base-uncased/'
+    train_args.model_name_or_path = './SeeRee/modeling/bert-base-uncased/'
     train_args.do_train = False
     train_args.do_eval = True
     train_args.do_test = True
