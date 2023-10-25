@@ -55,7 +55,7 @@ class SharedConfigs(object):
                             help="Directory with all datasets, each in one subfolder")
         parser.add_argument("--output_dir", default='output/', type=str, required=False,
                             help="The output directory to save checkpoint and test results.")
-        parser.add_argument("--train_yaml", default='coco_caption/train.yaml', type=str, required=False,
+        parser.add_argument("--data_dir", default='coco_caption/train.yaml', type=str, required=False,
                             help="Yaml file with all data for training.")
 
         # multimodal transformer modeling config
@@ -342,7 +342,7 @@ def basic_check_arguments(args):
         args.mask_tag_prob = -1
 
     if hasattr(args, 'do_train') and args.do_train:
-        check_yaml_file(op.join(args.data_dir, args.train_yaml))
+        check_yaml_file(op.join(args.data_dir, args.data_dir))
         if args.evaluate_during_training:
             check_yaml_file(op.join(args.data_dir, args.val_yaml))
         # check after num_gpus initialized

@@ -1,36 +1,72 @@
 # R2H: Building Multimodal Navigation Helpers that Respond to Help Requests
+**Authors:** Yue Fan, Jing Gu, Kaizhi Zheng, Xin Eric Wang (UC Santa Cruz)
+
+**Abstract:**
+Intelligent navigation-helper agents are critical as they can navigate users in unknown areas through environmental awareness and conversational ability, serving as potential accessibility tools for individuals with disabilities. In this work, we first introduce a novel benchmark, Respond to Help Requests (R2H), to promote the development of multi-modal navigation helpers capable of responding to requests for help, utilizing existing dialog-based embodied datasets. R2H mainly includes two tasks: (1) Respond to Dialog History (RDH), which assesses the helper agent's ability to generate informative responses based on a given dialog history, and (2) Respond during Interaction (RdI), which evaluates the effectiveness and efficiency of the response during consistent cooperation with a task performer. Furthermore, we explore two approaches to construct the navigation-helper agent, including fine-tuning a novel task-oriented multi-modal response generation model that can see and respond, named SeeRee, and employing a multi-modal large language model in a zero-shot manner. Analysis of the task and method was conducted based on both automatic benchmarking and human evaluations.
+
+[Paper](https://arxiv.org/abs/2305.14260)
 
 
-Todos:
-- [x] SeeRee code released
-- [x] RDH Data released
-- [x] RDH sample code released
-- [ ] RdI Data released
-- [ ] RdI Code released
 
 
 ## Data
-Our R2H benchmark is built upon three exsisting Vision-and-Dialog datasets:
+
+In order to automatically
+evaluate conversational multi-modal navigation helpers in a cooperative dynamic, we propose two tasks, Response from Dialog History (RDH) and Response during Interaction (RdI). **We first convert the three exsisting Vision-and-Dialog datasets to fit the input and output of RDH task,** where the three datasets are:
 - CVDN with photo-realistic indoor visual environment.
 - AVDN with photo-realistic ourdoor visual environment.
 - DialFRED with sythetic indoor visual environment.
 
+We format and convert these datasets to suit our goal of training and evaluating multimodal navigation-helper agents. Each data sample contains a natural language inquirey about the navigation from the task performer, visual observation from the task performer, a sequence of images showing oracle information for the navigation and a natural language response corresponding to the inquirey. 
 
-In order to automatically
-evaluate conversational multi-modal navigation helpers in a cooperative dynamic, we propose two tasks, Response from Dialog History (RDH) and Response during Interaction (RdI). 
+Three converted datasets are available at https://drive.google.com/drive/folders/11Le4tX3A_tPePgpc31c7Acgv33OX9JDl?usp=share_link
+
+
 
 In RDH task, the helper agent outputs responses based on individual task performer's help requests. We format and convert all three datasets to suit the training and evaluation on RDH task. Each data sample contains the input as a natural language inquirey about the navigation from the task performer, visual observation from the task performer and a sequence of images showing oracle information for the navigation; the output as a natural language response corresponding to the inquirey. 
 
-Data is available at https://drive.google.com/drive/folders/11Le4tX3A_tPePgpc31c7Acgv33OX9JDl?usp=share_link
+For RdI task, the helper agent needs to interact with the task performer consistantly. Therefore the input data are sampled in real-time from the simulator without the need of any offline dataset, except some task definitions i.e. trajectory starting points and target positions.
+
+
+
+## Code for our helper agent SeeRee
+SeeRee takes vision and language inputs and outputs the natural language response correspond to the inquirey in the input. The language input is history dialog (between the helper and task performer) and latest language inquirey from the task performer. The vision input is the latest task performer's observation and the observation along the future ground truth trajectory to the navigation target. Please follow the following to train and evaluate SeeRee. The training and evaluation are based on the data with RDH format we shared above.
+
+
+### Script for train (on CVDN for either task):
+
+```./SeeRee/scripts/train_seeree_cvdn.sh```
+
+### Script for eval (on CVDN RDH task):
+
+By running the evaluation script, we get a coco format json file containing the predicted responses for every trajectories in the validation set. 
+
+```./SeeRee/scripts/eval_seeree_cvdn.sh```
+
+Then, we replace the original human responses in the CVDN validation set with the predicted responses from SeeRee and run evaluation of the task performer (the [HAMT](https://github.com/cshizhe/VLN-HAMT) agent as we use in our paper) on this modified CVDN validation set. 
+
+### Script for eval (on CVDN RdI task):
+
+## Code for RDH task
+
+## Code for RdI task
 
 In RdI task, the helper agent needs to interact with the task performer consistantly. We deploy both the helper agent and task performer agent in simulations of CVDN for evaluation. Code will be released soon. 
-
-## Code
-
-RDH task
-In this task, helper agent output responses based on individual task performer's requests. 
 
 The input, a set of task performer's requests can be downloaded here:
 
 Then we can run the helper agent (in this repo, SeeRee) on the task performer's requests:
 
+<br />
+<br />
+
+*Please cite our paper as below if you use our work.*
+```
+@misc{fan2023r2h,
+      title={R2H: Building Multimodal Navigation Helpers that Respond to Help Requests}, 
+      author={Yue Fan and Jing Gu and Kaizhi Zheng and Xin Eric Wang},
+      year={2023},
+      eprint={2305.14260},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}```

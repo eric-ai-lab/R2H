@@ -219,7 +219,6 @@ def update_existing_config_for_inference(args):
     train_args.do_train = False
     train_args.do_eval = True
     train_args.do_test = True
-    train_args.val_yaml = args.val_yaml
     train_args.test_video_fname = args.test_video_fname
     return train_args
 
