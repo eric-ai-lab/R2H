@@ -1,3 +1,4 @@
 SeeRee/evalcap/
 SeeRee/modeling/video_swin_weights/
+**/__pycache__/
 *.pth
