@@ -6,7 +6,7 @@ Intelligent navigation-helper agents are critical as they can navigate users in 
 
 [Paper](https://arxiv.org/abs/2305.14260)
 
-
+[Webpage](https://sites.google.com/view/response2helprequests/home)
 
 
 ## Data
@@ -21,7 +21,7 @@ We format and convert these datasets to suit our goal of training and evaluating
 
 Three converted datasets are available at https://drive.google.com/drive/folders/11Le4tX3A_tPePgpc31c7Acgv33OX9JDl?usp=share_link
 
-
+Each dataset is split to train, seen and unseen validation set according to the original splits. **Especially, we create a sample set for each dataset to help better understanding of our data**.
 
 In RDH task, the helper agent outputs responses based on individual task performer's help requests. We format and convert all three datasets to suit the training and evaluation on RDH task. Each data sample contains the input as a natural language inquirey about the navigation from the task performer, visual observation from the task performer and a sequence of images showing oracle information for the navigation; the output as a natural language response corresponding to the inquirey. 
 
@@ -29,33 +29,45 @@ For RdI task, the helper agent needs to interact with the task performer consist
 
 
 
-## Code for our helper agent SeeRee
+## Code 
+
+We demonstrate how to use R2H benchmark based on our helper agent, SeeRee.
+
 SeeRee takes vision and language inputs and outputs the natural language response correspond to the inquirey in the input. The language input is history dialog (between the helper and task performer) and latest language inquirey from the task performer. The vision input is the latest task performer's observation and the observation along the future ground truth trajectory to the navigation target. Please follow the following to train and evaluate SeeRee. The training and evaluation are based on the data with RDH format we shared above.
 
+**Prerequisite**
 
-### Script for train (on CVDN for either task):
+ * We recommand using the docker envirionment provided by [SwinBERT](https://github.com/microsoft/SwinBERT#before-running-code-launch-docker-container) to run our code. We will later provide a non-docker envirionment setup tutorial. 
 
-```./SeeRee/scripts/train_seeree_cvdn.sh```
+ * [Weight download](https://drive.google.com/drive/folders/1hQqS9WJF9u0YmTVOb4VyBFho3TLT4pzl?usp=sharing)
+   * Weights of Video Swin model. 
+   * evalcap.
 
-### Script for eval (on CVDN RDH task):
+ * (optional) You may download the weight of SeeRee trained by us and skip training it by yourself: [TODO]
+
+### Script for train (for either task):
+
+```./SeeRee/scripts/train_seeree.sh```
+
+### Script for eval (on RDH task):
 
 By running the evaluation script, we get a coco format json file containing the predicted responses for every trajectories in the validation set. 
 
-```./SeeRee/scripts/eval_seeree_cvdn.sh```
+```./SeeRee/scripts/eval_seeree.sh```
 
-Then, we replace the original human responses in the CVDN validation set with the predicted responses from SeeRee and run evaluation of the task performer (the [HAMT](https://github.com/cshizhe/VLN-HAMT) agent as we use in our paper) on this modified CVDN validation set. 
+We provide the raw evaluation outputs (coco format) that we used for the experiment result in our paper [here](https://drive.google.com/drive/folders/1Adjwyj2l7sYxJ0W4Mf7WS0QKodTdNBfN?usp=sharing). 
 
-### Script for eval (on CVDN RdI task):
+Then, we replace the original human responses in the CVDN/AVDN/DialFRED validation set with the predicted responses from SeeRee and run evaluation of the task performer on this modified validation set. 
 
-## Code for RDH task
+### Script for real-time inference (for RdI task):
 
-## Code for RdI task
+In RdI task, the helper agent needs to interact with the task performer consistantly. We deploy both the helper agent and task performer agent in simulations of CVDN for evaluation. With the script below, we enable SeeRee to run as a real-time api for responding to any help request. 
 
-In RdI task, the helper agent needs to interact with the task performer consistantly. We deploy both the helper agent and task performer agent in simulations of CVDN for evaluation. Code will be released soon. 
+```./SeeRee/scripts/online_inference_seeree.sh```
 
-The input, a set of task performer's requests can be downloaded here:
+<br />
+<br />
 
-Then we can run the helper agent (in this repo, SeeRee) on the task performer's requests:
 
 <br />
 <br />
@@ -69,4 +81,7 @@ Then we can run the helper agent (in this repo, SeeRee) on the task performer's 
       eprint={2305.14260},
       archivePrefix={arXiv},
       primaryClass={cs.CL}
-}```
+}
+```
+
+We build our code based on [SwinBERT](https://github.com/microsoft/SwinBERT/tree/main). Our code is release with the under MIT license.

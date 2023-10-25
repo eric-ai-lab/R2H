@@ -1,5 +1,4 @@
 flag="--config ./SeeRee/8frm_default.json
-    --data_dir ../CVDN-RDH
     --per_gpu_train_batch_size 6
     --per_gpu_eval_batch_size 6
     --num_train_epochs 25
@@ -15,11 +14,12 @@ flag="--config ./SeeRee/8frm_default.json
     --gradient_accumulation_steps 1
     --learn_mask_enabled
     --loss_sparse_w 0.5
-    --output_dir ./output/cvdn_seeree
     --transfer_method 0
     -parsed
     --max_seq_a_length 40
     --max_seq_length 70
     --got_a_generate_b True"
 
-CUDA_VISIBLE_DEVICES='5' MASTER_PORT='25100' python ./SeeRee/tran.py $flag
+# Change the data_dir to train on other datasets 
+CUDA_VISIBLE_DEVICES='5' MASTER_PORT='25100' python ./SeeRee/tran.py \
+--data_dir ../DialFRED-RDH --output_dir ./output/dialfred_seeree $flag
