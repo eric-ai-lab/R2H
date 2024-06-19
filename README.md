@@ -19,7 +19,7 @@ evaluate conversational multi-modal navigation helpers in a cooperative dynamic,
 
 We format and convert these datasets to suit our goal of training and evaluating multimodal navigation-helper agents. Each data sample contains a natural language inquirey about the navigation from the task performer, visual observation from the task performer, a sequence of images showing oracle information for the navigation and a natural language response corresponding to the inquirey. 
 
-Three converted datasets are available at https://drive.google.com/drive/folders/11Le4tX3A_tPePgpc31c7Acgv33OX9JDl?usp=share_link
+The converted datasets (AVDN and DialFRED) are available at [https://drive.google.com/drive/folders/11Le4tX3A_tPePgpc31c7Acgv33OX9JDl?usp=share_link](https://drive.google.com/drive/folders/16AuTcEwtAmUijw_izNghdHzWVftmVeUO?usp=sharing). For converted CVDN dataset, due to the license issue, please email me to get it.
 
 Each dataset is split to train, seen and unseen validation set according to the original splits. **Especially, we create a sample set for each dataset to help better understanding of our data**.
 
